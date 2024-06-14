@@ -50,12 +50,12 @@ async def on_voice_state_update(member, before, after):
             print(str(member) + " muted")
 
         #if a member joins a channel and the bot has not already joined any channel, join channel
-        if not voice_client and after.channel:
+        elif not voice_client and after.channel:
             await after.channel.connect()
             print("connected to vc")
         
         #if a member moves from one channel to another and the new channel has more members, the bot will follow
-        elif voice_client and after.channel and len(after.channel.members) >= len(voice_client.channel.members):
+        elif voice_client and after.channel and before.channel != after.channel and len(after.channel.members) >= len(voice_client.channel.members):
             # await member.guild.voice_client.move_to(after.channel)
             await voice_client.move_to(after.channel)
             print("changed vc")
