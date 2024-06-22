@@ -37,14 +37,14 @@ async def on_voice_state_update(member, before, after):
     voice_client = member.guild.voice_client
 
     if member.id != BOT_USER_ID:
-        #if user has deafened themselves message user's current voice channel with their username and status eg 'username deafened'
-        if before.self_deaf == False and after.self_deaf == True:
+        #if user has deafened themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username deafened'
+        if before.self_deaf == False and after.self_deaf == True and voice_client.channel == after.channel:
             await play(voice_client)
             await after.channel.send(str(member) + " deafened")
             print(str(member) + " deafened")
 
-        #if user has muted themselves message user's current voice channel with their username and status eg 'username muted'
-        elif before.self_mute == False and after.self_mute == True:
+        #if user has muted themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username muted'
+        elif before.self_mute == False and after.self_mute == True and voice_client.channel == after.channel:
             await play(voice_client)
             await after.channel.send(str(member) + " muted")
             print(str(member) + " muted")
