@@ -3,20 +3,28 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 import time
+import json
 
 load_dotenv()
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 BOT_USER_ID = int(os.getenv('BOT_USER_ID'))
 TEST_CHANNEL_ID = int(os.getenv('TEST_CHANNEL_ID'))
 FFMPEG_PATH = os.getenv('FFMPEG_PATH')
-SOUND_PATH = os.getenv('SOUND_PATH')
+DEFAULT_SOUND_PATH = os.getenv('DEFAULT_SOUND_PATH')
+CUSTOM_SOUNDS_PATH = os.getenv('CUSTOM_SOUNDS_PATH')
 
+#custom sound paths for certain Discord members are stored in a .json file
+custom_sounds = json.load(open(os.path.join(os.path.dirname(__file__), CUSTOM_SOUNDS_PATH)))
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents, case_insensitive=False)
 
 #play chosen notification sound in voice channel
-async def play(voice_client):
-    audio_source = discord.FFmpegPCMAudio(executable=FFMPEG_PATH, source=SOUND_PATH)
+async def play(voice_client, member):   
+    if str(member.id) in custom_sounds:
+        sound_path = os.path.join(os.path.dirname(__file__), custom_sounds[str(member.id)])
+    else:
+        sound_path = os.path.join(os.path.dirname(__file__), DEFAULT_SOUND_PATH)
+    audio_source = discord.FFmpegPCMAudio(executable=FFMPEG_PATH, source=sound_path)
     if not voice_client.is_playing():
         voice_client.play(audio_source, after=None)
     else:
@@ -42,14 +50,14 @@ async def on_voice_state_update(member, before, after):
     if member.id != BOT_USER_ID:
         #if user has deafened themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username deafened'
         if is_connected() and before.self_deaf == False and after.self_deaf == True and voice_client.channel == after.channel:
-            await play(voice_client)
+            await play(voice_client, member)
             message = f'{member} deafened'
             await after.channel.send(message)
             print(message)
 
         #if user has muted themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username muted'
         elif is_connected() and before.self_mute == False and after.self_mute == True and voice_client.channel == after.channel:
-            await play(voice_client)
+            await play(voice_client, member)
             message = f'{member} muted'
             await after.channel.send(message)
             print(message)
