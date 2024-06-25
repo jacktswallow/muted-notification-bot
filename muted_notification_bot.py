@@ -44,25 +44,28 @@ async def on_ready():
 async def on_voice_state_update(member, before, after):
     voice_client = discord.utils.get(bot.voice_clients, guild = member.guild)
 
+    #check if bot is connected to voice
     def is_connected():
         return voice_client and voice_client.is_connected()
+    
+    #on user mute, if user is in the same voice channel as the bot, play mute sound and send message with their username and status eg 'username muted'
+    async def muted(mute_type):
+        if is_connected() and voice_client.channel == after.channel:
+            await play(voice_client, member, 'mute')
+            message = f'{member} {mute_type}'
+            await after.channel.send(message)
+            print(message)
 
     if member.id != BOT_USER_ID:
-        #if user has deafened themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username deafened'
-        if is_connected() and before.self_deaf == False and after.self_deaf == True and voice_client.channel == after.channel:
-            await play(voice_client, member, 'mute')
-            message = f'{member} deafened'
-            await after.channel.send(message)
-            print(message)
+        #if user has deafened themselves
+        if before.self_deaf == False and after.self_deaf == True:
+            await muted('deafened')
 
-        #if user has muted themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username muted'
-        elif is_connected() and before.self_mute == False and after.self_mute == True and voice_client.channel == after.channel:
-            await play(voice_client, member, 'mute')
-            message = f'{member} muted'
-            await after.channel.send(message)
-            print(message)
+        #if user has muted themselves
+        elif before.self_mute == False and after.self_mute == True:
+            await muted('muted')
         
-        #if a user joins the channel that the bot is in
+        #if a user joins the channel that the bot is in, play join sound
         elif voice_client and after.channel and after.channel == voice_client.channel and before.channel != after.channel:
             await play(voice_client, member, 'join')
             print(str(member) + " joined")
@@ -74,7 +77,6 @@ async def on_voice_state_update(member, before, after):
         
         #if a member moves from one channel to another and the new channel has more members, the bot will follow
         elif voice_client and after.channel and before.channel != after.channel and len(after.channel.members) >= len(voice_client.channel.members):
-            # await member.guild.voice_client.move_to(after.channel)
             await voice_client.move_to(after.channel)
             print('changed vc')
         
@@ -83,7 +85,7 @@ async def on_voice_state_update(member, before, after):
             await voice_client.disconnect()
             print('disconnected from vc')
         
-        #if a user leaves the channel that the bot is in
+        #if a user leaves the channel that the bot is in, play leave sound
         elif voice_client and before.channel and before.channel == voice_client.channel and after.channel != voice_client.channel:
             await play(voice_client, member, 'leave')
             print(str(member) + " left")
