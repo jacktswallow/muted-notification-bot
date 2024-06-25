@@ -34,18 +34,21 @@ async def on_ready():
 #handle voice state changes 
 @bot.event
 async def on_voice_state_update(member, before, after):
-    voice_client = member.guild.voice_client
+    voice_client = discord.utils.get(bot.voice_clients, guild = member.guild)
+
+    def is_connected():
+        return voice_client and voice_client.is_connected()
 
     if member.id != BOT_USER_ID:
         #if user has deafened themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username deafened'
-        if before.self_deaf == False and after.self_deaf == True and voice_client.channel == after.channel:
+        if is_connected() and before.self_deaf == False and after.self_deaf == True and voice_client.channel == after.channel:
             await play(voice_client)
             message = f'{member} deafened'
             await after.channel.send(message)
             print(message)
 
         #if user has muted themselves and is in the same vc as the bot, message user's current voice channel with their username and status eg 'username muted'
-        elif before.self_mute == False and after.self_mute == True and voice_client.channel == after.channel:
+        elif is_connected() and before.self_mute == False and after.self_mute == True and voice_client.channel == after.channel:
             await play(voice_client)
             message = f'{member} muted'
             await after.channel.send(message)
