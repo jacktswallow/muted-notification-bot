@@ -13,17 +13,19 @@ FFMPEG_PATH = os.getenv('FFMPEG_PATH')
 DEFAULT_SOUND_PATH = os.getenv('DEFAULT_SOUND_PATH')
 CUSTOM_SOUNDS_PATH = os.getenv('CUSTOM_SOUNDS_PATH')
 
-#custom sound paths for certain Discord members are stored in a .json file
-custom_sounds = json.load(open(os.path.join(os.path.dirname(__file__), CUSTOM_SOUNDS_PATH)))
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents, case_insensitive=False)
+
+#helper function to retrieve path
+def get_path(path):
+    return os.path.join(os.path.dirname(__file__), path)
 
 #play chosen notification sound in voice channel
 async def play(voice_client, member, status):   
     if str(member.id) in custom_sounds:
-        sound_path = os.path.join(os.path.dirname(__file__), custom_sounds[str(member.id)][status])
+        sound_path = get_path(custom_sounds[str(member.id)][status])
     else:
-        sound_path = os.path.join(os.path.dirname(__file__), DEFAULT_SOUND_PATH)
+        sound_path = get_path(DEFAULT_SOUND_PATH)
     audio_source = discord.FFmpegPCMAudio(executable=FFMPEG_PATH, source=sound_path)
     if not voice_client.is_playing():
         voice_client.play(audio_source, after=None)
@@ -93,9 +95,6 @@ async def on_voice_state_update(member, before, after):
         #if bot has just disconnected from a channel, check if any other channels have members and join the most populous
         if not voice_client:
             print('checking for active vc...')
-            if not member.guild.voice_channels:
-                print('no vc found') #works for now, expand to notify the user later
-                return
             most_pop_vc = member.guild.voice_channels[0]
             for vc in member.guild.voice_channels:
                 if len(vc.members) > len(most_pop_vc.members):
@@ -105,5 +104,8 @@ async def on_voice_state_update(member, before, after):
                 print('reconnected to vc')
             else:
                 print('no active vc')
+
+#custom sound paths for certain Discord members are stored in a .json file
+custom_sounds = json.load(open(get_path(CUSTOM_SOUNDS_PATH)))
 
 bot.run(BOT_TOKEN)
