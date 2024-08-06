@@ -30,14 +30,12 @@ async def play(voice_client, member, status):
     if not voice_client.is_playing():
         voice_client.play(audio_source, after=None)
     else:
-        print('already playing audio, retrying...')
         time.sleep(2)
         await play(voice_client, member, status)
 
 #message test channel on launch
 @bot.event
 async def on_ready():
-    print('running...')
     channel = bot.get_channel(TEST_CHANNEL_ID)
     await channel.send('running...')
 
@@ -56,7 +54,6 @@ async def on_voice_state_update(member, before, after):
             await play(voice_client, member, 'mute')
             message = f'{member} {mute_type}'
             await after.channel.send(message)
-            print(message)
 
     if member.id != BOT_USER_ID:
         #if user has deafened themselves
@@ -70,40 +67,31 @@ async def on_voice_state_update(member, before, after):
         #if a user joins the channel that the bot is in, play join sound
         elif voice_client and after.channel and after.channel == voice_client.channel and before.channel != after.channel:
             await play(voice_client, member, 'join')
-            print(str(member) + " joined")
 
         #if a member joins a channel and the bot has not already joined any channel, join channel
         elif not voice_client and after.channel:
             await after.channel.connect()
-            print('connected to vc')
         
         #if a member moves from one channel to another and the new channel has more members, the bot will follow
         elif voice_client and after.channel and before.channel != after.channel and len(after.channel.members) >= len(voice_client.channel.members):
             await voice_client.move_to(after.channel)
-            print('changed vc')
         
         #if the bot is the sole remaining member in a channel, disconnect 
         elif voice_client and len(voice_client.channel.members) == 1:
             await voice_client.disconnect()
-            print('disconnected from vc')
         
         #if a user leaves the channel that the bot is in, play leave sound
         elif voice_client and before.channel and before.channel == voice_client.channel and after.channel != voice_client.channel:
             await play(voice_client, member, 'leave')
-            print(str(member) + " left")
     else:
         #if bot has just disconnected from a channel, check if any other channels have members and join the most populous
         if not voice_client:
-            print('checking for active vc...')
             most_pop_vc = member.guild.voice_channels[0]
             for vc in member.guild.voice_channels:
                 if len(vc.members) > len(most_pop_vc.members):
                     most_pop_vc = vc
             if len(most_pop_vc.members) > 0:
                 await most_pop_vc.connect()
-                print('reconnected to vc')
-            else:
-                print('no active vc')
 
 #custom sound paths for certain Discord members are stored in a .json file
 custom_sounds = json.load(open(get_path(CUSTOM_SOUNDS_PATH)))
