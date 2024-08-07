@@ -66,7 +66,13 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     2. Right click on the channel and click 'Copy Channel ID'
     3. Open the '.env.example' file in the root directory of the project
     4. Paste the ID into the TEST_CHANNEL_ID field and save the file 
-9. Change the '.env.example' file name to '.env'
+9. Get your personal user ID
+    1. Open Discord and navigate to any server
+    3. Right click on the your profile in the panel on the right
+    4. Click 'Copy User ID'
+    5. Open the '.env.example' file in the root directory of the project
+    6. Paste the ID into the OWNER_USER_ID field and save the file 
+10. Change the '.env.example' file name to '.env'
    
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
