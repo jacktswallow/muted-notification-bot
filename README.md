@@ -47,11 +47,11 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     1. Go to the 'OAuth2' tab.
     2. Under 'scopes', check the 'bot' field
     3. Under 'bot permissions' check the following fields
-        - 'View Channels' (General permissions)
-        - 'Send Messages' (Text permissions)
-        - 'Use Slash Commands' (Text permissions)
-        - 'Connect' (Voice permissions)
-        - 'Speak' (Voice Permissions)
+        * 'View Channels' (General permissions)
+        * 'Send Messages' (Text permissions)
+        * 'Use Slash Commands' (Text permissions)
+        * 'Connect' (Voice permissions)
+        * 'Speak' (Voice Permissions)
     4. Click 'copy'
     5. Paste the URL in a new browser window or tab
     6. Choose the server to invite the bot to and click 'Authorize'
