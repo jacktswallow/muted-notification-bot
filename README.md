@@ -49,7 +49,6 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     3. Under 'bot permissions' check the following fields
         * 'View Channels' (General permissions)
         * 'Send Messages' (Text permissions)
-        * 'Use Slash Commands' (Text permissions)
         * 'Connect' (Voice permissions)
         * 'Speak' (Voice Permissions)
     4. Click 'copy'
