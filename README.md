@@ -1,3 +1,4 @@
+<a id="readme-top"></a>
 # Muted Notification Bot
 A Discord bot that provides custom text and audio notifications on user mute/deafen, join, and leave. Supports unique notification sounds assigned to each of the three tracked actions (mute/deafen, join, leave) for individual users. Supports custom .mp3s stored locally on the host machine.
 
