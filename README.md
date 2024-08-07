@@ -80,26 +80,26 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-- Running the bot
-    1. Open a new terminal window in the root directory of the project
-    2. Run the following command 
-    ```sh
-    python muted-notification-bot.py
-    ```
-- Changing the default sound
-    1. Place the desired .mp3 file in the sounds/default folder (Short .mp3 file recommended, ideally 2 seconds or less)
-    2. Open the '.env' file in the root directory of the project
-    3. Replace the existing default sound path with the relative path to the desired sound (eg. './sounds/default/default.mp3')
-    4. Save the file
-- Adding custom sounds 
-    1. Place the desired .mp3 file in the apropriate directory within the 'sounds' folder (Short .mp3 file recommended, ideally 2 seconds or less)
-    2. Open the 'sounds.json' file in the root directory of the project (The existing entries are examples only and should be replaced)
-    3. Open Discord and find the user you wish to assign the custom sound to
-    4. Right click on the user and click 'Copy User ID'
-    5. Paste the user ID into the 'sounds.json' file, replacing one of the example IDs
-    6. Replace the example paths under "mute":, "join":, and "leave": (All paths must be replaced for the bot to function correctly!)
-    7. Ensure the formatting is correct, eg: "123456789123456789": {"mute": "./sounds/mute/mute1.mp3", "join": "./sounds/join/join1.mp3", "leave": "./sounds/leave/leave1.mp3"},
-    8. Save the file
+### Running the bot
+1. Open a new terminal window in the root directory of the project
+2. Run the following command 
+```sh
+python muted-notification-bot.py
+```
+### Changing the default sound
+1. Place the desired .mp3 file in the sounds/default folder (Short .mp3 file recommended, ideally 2 seconds or less)
+2. Open the '.env' file in the root directory of the project
+3. Replace the existing default sound path with the relative path to the desired sound (eg. './sounds/default/default.mp3')
+4. Save the file
+### Adding custom sounds 
+1. Place the desired .mp3 file in the apropriate directory within the 'sounds' folder (Short .mp3 file recommended, ideally 2 seconds or less)
+2. Open the 'sounds.json' file in the root directory of the project (The existing entries are examples only and should be replaced)
+3. Open Discord and find the user you wish to assign the custom sound to
+4. Right click on the user and click 'Copy User ID'
+5. Paste the user ID into the 'sounds.json' file, replacing one of the example IDs
+6. Replace the example paths under "mute":, "join":, and "leave": (All paths must be replaced for the bot to function correctly!)
+7. Ensure the formatting is correct, eg: "123456789123456789": {"mute": "./sounds/mute/mute1.mp3", "join": "./sounds/join/join1.mp3", "leave": "./sounds/leave/leave1.mp3"},
+8. Save the file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
