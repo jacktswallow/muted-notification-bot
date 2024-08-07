@@ -94,6 +94,7 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     5. Paste the user ID into the 'sounds.json' file, replacing one of the example IDs
     6. Replace the example paths under "mute":, "join":, and "leave": (All paths must be replaced for the bot to function correctly!)
     7. Ensure the formatting is correct, eg: "123456789123456789": {"mute": "./sounds/mute/mute1.mp3", "join": "./sounds/join/join1.mp3", "leave": "./sounds/leave/leave1.mp3"},
+    8. Save the file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
