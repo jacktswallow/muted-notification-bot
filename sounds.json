@@ -1,0 +1,4 @@
+{
+    "123456789123456789": {"mute": "./sounds/mute/mute1.mp3", "join": "./sounds/join/join1.mp3", "leave": "./sounds/leave/leave1.mp3"},
+    "234567891234567891": {"mute": "./sounds/mute/mute2.mp3", "join": "./sounds/join/join2.mp3", "leave": "./sounds/leave/leave2.mp3"}
+}
