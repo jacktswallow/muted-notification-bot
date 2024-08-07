@@ -84,7 +84,7 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
 1. Open a new terminal window in the root directory of the project
 2. Run the following command 
 ```sh
-python muted-notification-bot.py
+python muted_notification_bot.py
 ```
 ### Changing the default sound
 1. Place the desired .mp3 file in the sounds/default folder (Short .mp3 file recommended, ideally 2 seconds or less)
