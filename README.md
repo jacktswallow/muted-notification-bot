@@ -51,9 +51,9 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     2. Ensure you are logged in to your Discord account
     3. Click 'New Application'
     4. Name the bot and click 'Create'
-    5. Go to the 'Bot' tab and click 'Add Bot'
+    5. Go to the 'Bot' tab and click 'Add Bot' or 'Reset Token'
     6. Copy the token. Treat this like a password, do not share it with anyone.
-    7. Open the '.env.example' file in the root directory of the project
+    7. Open the '.env.example' file in the root directory of the project (If the file is not visible, make sure show hidden files is enabled (Mac: Cmd⌘ + Shift⇧ + .))
     8. Paste the token into the 'BOT_TOKEN' field and save the file
 5. Enable privileged intents
     1. Navigate back to the 'Bot' tab
@@ -72,18 +72,18 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     6. Choose the server to invite the bot to and click 'Authorize'
 7. Get the bot's user ID
     1. Open Discord and navigate to the server the bot was invited to
-    2. Right click on the bot's profile in the panel on the right
+    2. Right click on the bot's profile in the panel on the right (if the panel isn't visible, click the 'Show Member List' icon)
     3. Click 'Copy User ID'
     4. Open the '.env.example' file in the root directory of the project
     5. Paste the ID into the BOT_USER_ID field and save the file 
 8. Get the test channel ID
     1. Choose a channel to be your 'test channel'. This channel will recieve a 'running' message from the bot on startup
-    2. Right click on the channel and click 'Copy Channel ID'
+    2. Open Discord, right click on the desired channel and click 'Copy Channel ID'
     3. Open the '.env.example' file in the root directory of the project
     4. Paste the ID into the TEST_CHANNEL_ID field and save the file 
 9. Get your personal user ID
     1. Open Discord and navigate to any server
-    3. Right click on the your profile in the panel on the right
+    3. Right click on the your profile in the panel on the right (if the panel isn't visible, click the 'Show Member List' icon)
     4. Click 'Copy User ID'
     5. Open the '.env.example' file in the root directory of the project
     6. Paste the ID into the OWNER_USER_ID field and save the file 
