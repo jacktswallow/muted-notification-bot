@@ -34,6 +34,10 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     ```sh
     pip install python-dotenv
     ```
+  * [PyNaCl](https://pypi.org/project/PyNaCl/)
+    ```sh
+    pip install PyNaCl
+    ```
 
 ### Installation
 
@@ -86,8 +90,12 @@ A Discord bot that provides custom text and audio notifications on user mute/dea
     3. Right click on the your profile in the panel on the right (if the panel isn't visible, click the 'Show Member List' icon)
     4. Click 'Copy User ID'
     5. Open the '.env.example' file in the root directory of the project
-    6. Paste the ID into the OWNER_USER_ID field and save the file 
-10. Change the '.env.example' file name to '.env'
+    6. Paste the ID into the OWNER_USER_ID field and save the file
+10. Get the ffmpeg.exe path
+    1. Locate the ffmpeg.exe file that was downloaded earlier (Should be within the 'bin' folder in the ffmpeg download/install location)
+    2. Copy the .exe's file path (eg. 'C:/ffmpeg/bin/ffmpeg.exe' or '/Users/user/ffmpeg/bin/ffmpeg.exe')
+    3. Paste the path into the OWNER_USER_ID field (within quotations) and save the file
+11. Change the '.env.example' file name to '.env'
    
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
